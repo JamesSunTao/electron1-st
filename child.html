@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>子窗口</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+  </head>
+  <body onload="onloadData()">
+    <img src="./src/assets/6.jpeg" style="width: 100px;" alt="">
+    <h1>我是子窗口</h1>
+    <p>接收到主窗口传递过来的数据：
+      <ul>
+        <li>姓名：<label id="label_name"></label></li>
+        <li>年龄：<label id="label_age"></label></li>
+      </ul>
+    </p>
+    <button onclick="closeCurWindow()" id="button">关闭当前窗口</button>
+
+  </body>
+  <script src="./src/js/event.js"></script>
+</html>
