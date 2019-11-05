@@ -3,12 +3,29 @@ const { app, BrowserWindow } = require('electron')
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
 let win
-
+/**
+ * width
+ * height
+ * minWidth
+ * minHeight
+ * maxHeight
+ * maxWidth:800,
+ * x 初始相对于窗口x的位置
+ * y 初始相对于窗口y的位置
+ * 
+ * 
+ * */ 
 function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth:300,
+    minHeight:400,
+    maxHeight:600,
+    maxWidth:800,
+    // x:20,
+    // y:20,
     webPreferences: {
       nodeIntegration: true
     }
