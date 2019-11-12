@@ -117,3 +117,16 @@ function openFileDialog(params) {
     const label = document.getElementById("fileLabel");
     label.innerText = dialog.showOpenDialog({properties:['openFile']});
 }
+
+/**
+ * 定制对话框
+ * 
+ * */ 
+function openCustomFileDialog(params) {
+    const label = document.getElementById("fileCustomLabel");
+    var options = {};
+    options.title = "tao的定制对话框";
+    options.buttonLabel = "我是label"
+    options.properties = ['openFile'];
+    label.innerText = dialog.showOpenDialog(options);
+}
