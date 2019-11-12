@@ -143,8 +143,10 @@ function openCustomFileDialog(params) {
     options.buttonLabel = "选择"
     options.properties = ['openFile'];
     options.filters = [
-        {name:'图像文件',extensions:['jpg','bmp','png','jpeg','gif']},
-        {name:'视屏文件',extensions:['mp4']}
+        { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+        { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] },
+        { name: 'Custom File Type', extensions: ['as'] },
+        { name: 'All Files', extensions: ['*'] }
     ]
     label.innerText = dialog.showOpenDialog(options);
  }
