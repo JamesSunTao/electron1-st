@@ -1,3 +1,4 @@
+
 const remote = require('electron').remote
 const BrowserWindow = remote.BrowserWindow
 /**
@@ -57,7 +58,11 @@ function closeAllChildWindow(params) {
         global.windows = undefined;
     }
 }
-
+/**
+ * 文件展示窗口（只针对 MAC os）
+ * 通过BrowserWindow 对象的setRepresentedFilename方法设置文件的目录，当前窗口文件的图标
+ * 会放到窗口的标题栏上，标题栏右侧会显示该文件所在的目录层次
+ * */ 
 
 // --------------------------------------
 // 获取ipcmain对象
@@ -95,4 +100,20 @@ function closeCurWindow(params) {
     const win = remote.getCurrentWindow()
     ipcRenderer.send("childData",'窗口已关闭');
     win.close();
+}
+
+// 打开对话框
+/**
+ * browserWindow 参数允许该对话框将自身附加到父窗口, 作为父窗口的模态框。
+ * callback： 返回选中的文件或路径，如果不指定该参数，选中的文件何目录的路径会通过showOpenDialog方法的返回值返回
+ * options:
+ * title:标题
+ * defaultPath ： String 默认路劲
+ * buttonLabel ： open按钮的文本
+ * filters ；用于过滤指定类型的文件
+ * */ 
+const dialog= remote.dialog
+function openFileDialog(params) {
+    const label = document.getElementById("fileLabel");
+    label.innerText = dialog.showOpenDialog({properties:['openFile']});
 }

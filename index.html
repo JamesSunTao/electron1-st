@@ -21,9 +21,13 @@
     <button onclick="createMoreWindow()" id="button">创建多个窗口</button>
     <button onclick="closeAllChildWindow()" id="button">关闭除主窗口外的所有子窗口</button>
 
-    <br>
+    <br>id
     <button onclick="sendData()" id="button">传递数据给子窗口</button>
     <p>我是子窗口窗底过来的数据：<em id="childText">初始为0</em></p>
+
+    <br>
+    <button onclick="openFileDialog()" id="openDialog">打开对话框</button>
+    <label id="fileLabel"></label>
   </body>
   <script src="./src/js/event.js"></script>
 </html>
