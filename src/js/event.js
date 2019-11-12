@@ -130,3 +130,21 @@ function openCustomFileDialog(params) {
     options.properties = ['openFile'];
     label.innerText = dialog.showOpenDialog(options);
 }
+
+/**
+ * options.filters :对象数组
+ * 
+ * */ 
+
+ function chooseFileType(params) {
+    const label = document.getElementById("chooseFileTypeLabel");
+    var options = {};
+    options.title = "选择文件类型";
+    options.buttonLabel = "选择"
+    options.properties = ['openFile'];
+    options.filters = [
+        {name:'图像文件',extensions:['jpg','bmp','png','jpeg','gif']},
+        {name:'视屏文件',extensions:['mp4']}
+    ]
+    label.innerText = dialog.showOpenDialog(options);
+ }
