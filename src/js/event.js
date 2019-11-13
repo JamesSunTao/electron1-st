@@ -96,6 +96,10 @@ function onloadData(params) {
         name.innerText = arg.name
         age.innerText = arg.age
     })
+
+    window.addEventListener("message",function(e) {
+        messageData.innerText = e.data
+    })
 } 
 
 function closeCurWindow(params) {
@@ -249,7 +253,7 @@ function showMessageBoxFun(){
 
 /**
  * 使用html5 API创建子窗口
- * window.open 方法
+ * window.open 使用 window.open 创建一个新窗口时会返回一个 BrowserWindowProxy对象，并提供一个有限功能的子窗口.
  * window.open(url[, title][, attributes])
  * url ：打开页面的链接
  * title :设置页面标题，如已经设置则忽略
@@ -257,9 +261,43 @@ function showMessageBoxFun(){
  * 
  * 
  * BrowserWindowProxy 可以认为是BrowserWindow的代理类
+ * 
+ * 控制窗口
+ * window.blur()
+ * window.focus()
+ * window.close()
+ * window.print()
+ * 
  * */ 
-function openChildWindow(params) {
-//    win = window.open('./child.html',"子页面","width=300,height=200");
-   win = window.open('https://www.baidu.com/')
-   console.log(win)
+function openChildWindow() {
+   winChild = window.open('./child.html',"子页面","width=500,height=400");
+//    win = window.open('https://www.baidu.com/')  // 使用 window.open 创建一个新窗口时会返回一个 BrowserWindowProxy对象，并提供一个有限功能的子窗口. 
+  
 } 
+
+function focusWindow() {
+    if (winChild != undefined) {
+        winChild.focus()   
+    }  
+}
+function blurWindow() {
+    if (winChild != undefined) {
+        winChild.blur()   
+    }   
+}
+function closeWindow() {
+    winChild.close();
+}
+function printWindow() {
+    winChild.print();
+}
+
+/**
+ * postMessage 窗口信息传递
+ * */ 
+function sendMessage() {
+    if (winChild != undefined) {
+        // electron 新特性,可以利用Id直接访问value
+        winChild.postMessage(messageData.value,"*");   
+    }   
+}
