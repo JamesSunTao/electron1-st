@@ -133,7 +133,7 @@ function openCustomFileDialog(params) {
 
 /**
  * options.filters :对象数组
- * 
+ * openDirectory ：选择目录
  * */ 
 
  function chooseFileType(params) {
@@ -150,3 +150,34 @@ function openCustomFileDialog(params) {
     ]
     label.innerText = dialog.showOpenDialog(options);
  }
+
+
+ /**
+ * 选择目录 : openDirectory
+ * createDirectory 创建目录，只是针对Mac OS系统
+ * */ 
+function chooseDir(params) {
+    const label = document.getElementById("chooseDirLabel");
+    var options = {};
+    options.title = "选择目录";
+    options.buttonLabel = "选择目录"
+    options.properties = ['openDirectory','promptToCreate '];
+    label.innerText = dialog.showOpenDialog(options);
+}
+
+
+ /**
+ * 打开多个文件何目录
+ * multiSelections-允许多选。
+ * MAC ： 如果想同时选择多个文件何目录，需要指定openFile 和 openDirectory
+ * Windows : 只需要指定openFile即可 ，若只选择openDirectory只可以选择目录
+ * */ 
+
+function chooseMoreFile(params) {
+    const label = document.getElementById("chooseMoreFileLabel");
+    var options = {};
+    options.title = "选择多个目录和文件";
+    options.buttonLabel = "选择多个目录和文件"
+    options.properties = ['openFile','promptToCreate ','multiSelections'];
+    label.innerText = dialog.showOpenDialog(options);
+}
