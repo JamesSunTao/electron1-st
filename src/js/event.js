@@ -232,6 +232,5 @@ function showMessageBoxFun(){
     options.buttons = ["ok1","cancel1"];
     options.icon = './src/assets/pig2.ico';
     options.message = "这是消息对话框的内容，content 飞流直下三千尺";
-    options.checkboxChecked = false;
     label.innerText = dialog.showMessageBox(options);
 }
