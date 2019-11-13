@@ -181,3 +181,24 @@ function chooseMoreFile(params) {
     options.properties = ['openFile','promptToCreate ','multiSelections'];
     label.innerText = dialog.showOpenDialog(options);
 }
+
+ /**
+ * 通过回调函数返回选的的目录和文件
+ * */ 
+
+function callback_chooseMoreFile(params) {
+    const label = document.getElementById("callback_chooseMoreFileLabel");
+    var options = {};
+    options.title = "选择多个目录和文件";
+    options.buttonLabel = "选择多个目录和文件"
+    options.properties = ['openFile','promptToCreate ','multiSelections'];
+    if (process.platform == 'darwin') { // 如果是苹果系统，添加openDirectory
+        options.properties.push('openDirectory');
+    }
+    dialog.showOpenDialog(options,(filePaths)=>{
+        for (let index = 0; index < filePaths.length; index++) {
+            label.innerText += filePaths[index]+'\r\n';
+            
+        }
+    });
+}
