@@ -202,3 +202,36 @@ function callback_chooseMoreFile(params) {
         }
     });
 }
+
+
+/**
+ * 保存对话框  showSaveDialog
+ * */ 
+
+function showSaveDialogFun(params) {
+    const label = document.getElementById("showSaveDialogLabel");
+    var options = {};
+    options.title = "保存文件";
+    options.buttonLabel = "保存"
+    options.defaultPath = 'F:\Electron'; // 打开文件的默认路径
+    options.nameFieldLabel = "文件名输入框对应的自定义标签名";  //(MAC OS)
+    // options.properties = ['openFile','promptToCreate ','multiSelections'];
+    dialog.showSaveDialog(options,(fileName)=>{
+        label.innerText = fileName;
+    });
+}
+
+/**
+ * 消息对话框 showMessageBox
+ * */ 
+function showMessageBoxFun(){
+    const label = document.getElementById("showMessageBoxLabel");
+    var options = {};
+
+    options.title = '标题';
+    options.buttons = ["ok1","cancel1"];
+    options.icon = './src/assets/pig2.ico';
+    options.message = "这是消息对话框的内容，content 飞流直下三千尺";
+    options.checkboxChecked = false;
+    label.innerText = dialog.showMessageBox(options);
+}
