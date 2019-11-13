@@ -14,12 +14,14 @@ function getSizePosition() {
     console.log("px:"+px+', py:'+ py);
 }
 
+// 动态设置窗口大小
 function setSizePosition(params) {
     const win = remote.getCurrentWindow();
     win.setSize(300,300,true)
     win.setPosition(10,10)
 }
 
+// 锁定窗口
 function kioskWindow(params) {
     const win = remote.getCurrentWindow();
     const btn = document.getElementById('button');
@@ -33,7 +35,7 @@ function kioskWindow(params) {
     }
 }
 
-
+//  创建子窗口
 function createMoreWindow(params) {
     const win = remote.getCurrentWindow();
     if (global.windows == undefined) {
@@ -222,15 +224,42 @@ function showSaveDialogFun(params) {
 }
 
 /**
- * 消息对话框 showMessageBox
+ * 消息对话框 showMessageBox  ，错误对话框 ：showErrorBox（用法跟showMessageBox一样）
+ * type: 设置消息对话框类型
+ * none ：默认对话框
+ * info ： 信息对话框
+ * warning ：警告对话框
+ * question ： 询问对话框
+ * error ： 错误对话框
  * */ 
 function showMessageBoxFun(){
     const label = document.getElementById("showMessageBoxLabel");
     var options = {};
 
     options.title = '标题';
-    options.buttons = ["ok1","cancel1"];
-    options.icon = './src/assets/pig2.ico';
+    options.buttons = ["按钮1","按钮2","按钮3"];
+    options.type = "question";
+    // options.icon = './src/assets/pig2.ico'; 
     options.message = "这是消息对话框的内容，content 飞流直下三千尺";
-    label.innerText = dialog.showMessageBox(options);
+    dialog.showMessageBox(options,(res)=>{
+        label.innerText = `单击了${options.buttons[res]}`
+    });
 }
+
+
+/**
+ * 使用html5 API创建子窗口
+ * window.open 方法
+ * window.open(url[, title][, attributes])
+ * url ：打开页面的链接
+ * title :设置页面标题，如已经设置则忽略
+ * attributes： 可设置与窗口相关的属性
+ * 
+ * 
+ * BrowserWindowProxy 可以认为是BrowserWindow的代理类
+ * */ 
+function openChildWindow(params) {
+//    win = window.open('./child.html',"子页面","width=300,height=200");
+   win = window.open('https://www.baidu.com/')
+   console.log(win)
+} 
