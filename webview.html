@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webview页面</title>
+</head>
+<body onload="onloadWebview()">
+    <button onclick="test_webviewAPI()">webview API</button>
+    <webview id="foo" src="./node.html" style="display:inline-flex;height:480px;min-width: 600px;" nodeintegration></webview>
+    <br>
+    <webview id="webview1" src="https://www.baidu.com/" style="display:inline-flex; width:640px; height:480px"></webview>
+    <p id="indicator"></p>
+    
+</body>
+<script src="./src/js/event.js"></script>
+</html>

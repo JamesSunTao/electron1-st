@@ -96,9 +96,11 @@ function onloadData(params) {
         name.innerText = arg.name
         age.innerText = arg.age
     })
+    
+    // 接受 postMessage 传递过来的数据  origin 文件来源，是谁打开了子串口返回的是index.html页面的域名
+        window.addEventListener("message",function(e) {
+        messageData.innerText = e.data + "——来源："+ e.origin;
 
-    window.addEventListener("message",function(e) {
-        messageData.innerText = e.data
     })
 } 
 
@@ -265,9 +267,9 @@ function showMessageBoxFun(){
  * 控制窗口
  * window.blur()
  * window.focus()
- * window.close()
+ * window.close()，
  * window.print()
- * 
+ * win.eval() 用来执行JavaScript代码
  * */ 
 function openChildWindow() {
    winChild = window.open('./child.html',"子页面","width=500,height=400");
@@ -300,4 +302,57 @@ function sendMessage() {
         // electron 新特性,可以利用Id直接访问value
         winChild.postMessage(messageData.value,"*");   
     }   
+}
+
+/**
+ * 向子窗口发送可执行的JavaScript代码，win.eval()
+ * */ 
+function evalSendMessage() {
+    if (winChild != undefined) {
+        // electron 新特性,可以利用Id直接访问value
+        winChild.eval('messageData.innerText="'+evalSendMessageInput.value+'"');   
+    }   
+}
+
+
+/**
+ * 在窗口嵌入web页面
+ * 1。 <webview>
+ * 2. webview 事件
+ * 3。 在<webview>中装载页面中执行NODE.js API
+ * 4. webview 常用的API
+ * */ 
+
+
+function openWebviewPage(params) {
+    win_webview = window.open('./webview.html','webView页面')
+}
+
+
+// 使用webview装在页面
+function onloadWebview(params) {
+    const webview1 = document.getElementById('webview1')
+    const indicator = document.getElementById('indicator')
+
+    const loadstart1 = () => {
+        console.log('loading......')
+      indicator.innerText = 'loading...'
+    }
+
+    const loadstop = () => {
+        console.log('stop......')
+      indicator.innerText = 'stop!!!!!'
+    }
+
+    webview1.addEventListener('did-start-loading', loadstart1)
+    webview1.addEventListener('did-stop-loading', loadstop)
+}
+
+
+function test_webviewAPI(params) {
+    webview = document.getElementById('webview1')
+    let title = webview.getTitle(),url = webview.getURL()
+    console.log("title:"+title+'\r\n'+"url:"+url)
+    console.log(webview)
+    // webview.openDevTools()/
 }
