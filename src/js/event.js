@@ -1,6 +1,8 @@
 
 const remote = require('electron').remote
 const BrowserWindow = remote.BrowserWindow
+const {Menu,MenuItem} = require('electron').remote
+
 /**
  * getSize()  // 获取窗口大小
  * setPosition(width,height,flag)  // flag设置为true ，代表一动画效果设置尺寸（仅限制于mac OS）
@@ -355,7 +357,6 @@ function test_webviewAPI(params) {
     console.log("title:"+title+'\r\n'+"url:"+url)
     console.log(webview)
     // webview.openDevTools()/
-    //孙涛
 }
 
 /**
@@ -367,4 +368,39 @@ function click_progressBar(params) {
 }
 
 
+/**
+ * 
+ * */ 
+function  clickSave(params) {
+    const Win = new BrowserWindow({width:500,height:300});
+    Win.loadURL('https://www.baidu.com/')
+}
+
+var customMenu = new Menu();
+function setOriginMenu(params) {
+     const menu = new Menu();
+     var menuItemOPen = new MenuItem({label:'打开'});
+     var saveMenuItem= new MenuItem({label:'保存',click:clickSave});
+     var saveMenuFile= new MenuItem({label:'文件',submenu:[menuItemOPen,saveMenuItem]});
+
+     menuItemCustom = new MenuItem({label:'定制菜单',submenu:customMenu})
+     menu.append(saveMenuFile);
+     menu.append(menuItemCustom);
+     Menu.setApplicationMenu(menu);
+}
+ 
+function addMenuItem() {
+   var type = 'normal';
+   if (radio.checked) {
+       type = 'radio'
+   } 
+   if (checkbox.checked) {
+    type = 'checkbox'
+   } 
+   customMenu.append(new MenuItem({label:menuItem.value,type:type}))
+   menuItem.value = '';
+   checkbox.checked = false;
+   radio.checked = false;
+   Menu.setApplicationMenu(Menu.getApplicationMenu())
+}
 

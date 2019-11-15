@@ -99,13 +99,15 @@ function createWindow () {
        {
          label:'关于',
          role: 'about' , //只针对Mac
-         type: 'checkbox', checked: true 
+         icon:'./src/assets/pig16_1.ico',
+        
         },
         {
           type:'separator' // 分割条
         },
         {
           label:'关闭',
+          icon:'./src/assets/pig16_2.ico',
           accelerator:'Ctrl+Q',
           click:()=>{win.close()}
         },
@@ -174,8 +176,8 @@ function createWindow () {
     },
    ]}
  ]
- const menu = Menu.buildFromTemplate(template);
- Menu.setApplicationMenu(menu)
+//  const menu = Menu.buildFromTemplate(template);
+//  Menu.setApplicationMenu(menu)
 
   // 打开开发者工具
   win.webContents.openDevTools()

@@ -75,6 +75,24 @@
     <button onclick="openWebviewPage()">打开webview页面</button>
     <br>
     <button onclick="click_progressBar()" >进度条</button>
+
+    <br>
+    <h1>动态添加菜单</h1>
+    <button onclick="setOriginMenu()" >添加最初的菜单</button>
+    <ul>
+      <li>
+        菜单文本：<input type="text" id="menuItem">
+      </li>
+      <li> 
+         <input type="radio" name="radio" id="radio">单选
+      </li>
+      <li>
+          <input type="radio" name="radio" id="checkbox">多选
+      </li>
+      <li>
+        <button onclick="addMenuItem()">动态添加菜单项</button>
+      </li>
+    </ul>
   </body>
   <script src="./src/js/event.js"></script>
 </html>
