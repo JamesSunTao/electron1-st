@@ -357,3 +357,14 @@ function test_webviewAPI(params) {
     // webview.openDevTools()/
     //孙涛
 }
+
+/**
+*任务栏进度条 windows (桌面图标显示的进度)
+*/ 
+function click_progressBar(params) {
+    const Win = remote.getCurrentWindow();
+    Win.setProgressBar(0.5);
+}
+
+
+

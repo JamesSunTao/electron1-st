@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow ,Menu} = require('electron')
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
@@ -73,6 +73,110 @@ function createWindow () {
   // 加载index.html文件
   win.loadFile('index.html')
   // modelWin.loadFile('child.html')  
+
+ // 定义菜单模板
+ /**
+ 使用模板创建应用菜单
+ * 
+ * 1. 应用菜单 （窗口菜单）
+ *    windows 、Linux 和 MAc OS x
+ * 2. 上下文菜单 
+ * 
+ * 编写菜单方法：
+ * 1.模板
+ *    
+ * 2. 代码
+ * 
+ * 菜单类型 （type:）
+ * 1-5: normal, separator, submenu, checkbox or radio
+ * */  
+
+
+
+ const template = [
+   { label:'文件',
+     submenu:[
+       {
+         label:'关于',
+         role: 'about' , //只针对Mac
+         type: 'checkbox', checked: true 
+        },
+        {
+          type:'separator' // 分割条
+        },
+        {
+          label:'关闭',
+          accelerator:'Ctrl+Q',
+          click:()=>{win.close()}
+        },
+        {
+          label:'剪切',
+          role:'cut'
+        },
+        {
+          label:'粘补',
+          role:'paste'
+        },
+        {
+          type:'separator' // 分割条
+        },
+        {
+          label:'单选1',
+          type:'radio' 
+        },
+        {
+          label:'单选2',
+          type:'radio' 
+        },  
+        {
+          label:'单选3',
+          type:'radio' 
+        },
+        {
+          type:'separator' // 分割条
+        },
+        { role: 'quit' },
+        {
+          label:'windows',
+          type:'submenu',
+          role:'windowMenu'
+        }
+     ]
+   },
+   {label:'编辑',submenu:[
+     {
+       label:'复制',
+       click:()=>{win.webContents.insertText('复制')},
+     },
+     {
+      label:'剪切',
+      click:()=>{win.webContents.insertText('剪切')},
+    },
+    {
+      type:'separator' // 分割条R
+    },
+    {
+      label:'查找',
+      accelerator:'Ctrl+R',
+      click:()=>{win.webContents.insertText('查找')}
+    },
+    {
+      label:'单选1',
+      type:'radio' 
+    },
+    {
+      label:'单选2',
+      type:'radio' 
+    },  
+    {
+      label:'单选3',
+      type:'radio' 
+    },
+   ]}
+ ]
+ const menu = Menu.buildFromTemplate(template);
+ Menu.setApplicationMenu(menu)
+
   // 打开开发者工具
   win.webContents.openDevTools()
 
