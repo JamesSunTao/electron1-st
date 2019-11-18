@@ -6,7 +6,7 @@
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
-  <body>
+  <body onload="onload()">
     <img src="./src/assets/5.jpg" style="width: 100px;" alt="">
     <textarea name="" id="" cols="30" rows="10"></textarea>
     <h1>Hello World!</h1>
@@ -93,6 +93,28 @@
         <button onclick="addMenuItem()">动态添加菜单项</button>
       </li>
     </ul>
+    <h1>上下文菜单</h1>
+    <div id="panel" style="width: 300px;height: 200px;background: orange;"></div>
+    
+    <h1>拖拽图像，并显示</h1>
+    <div id="imgPanel" style="width: 150px;height: 80px;background: olive;"> </div>
+   
+    <label for="">请将图像文件拖拽到该区域</label>
+    <img id="image" alt="">
   </body>
   <script src="./src/js/event.js"></script>
+  <script type="text/javascript">
+     imgPanel.ondragover = () =>{
+       return false;
+     }
+     imgPanel.ondrop = (e)=>{
+       e.preventDefault();
+       for (let f of e.dataTransfer.files) {
+        image.src = f.path;
+         break;
+       }
+       return false
+     }
+  
+  </script>
 </html>

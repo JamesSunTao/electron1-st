@@ -376,6 +376,9 @@ function  clickSave(params) {
     Win.loadURL('https://www.baidu.com/')
 }
 
+/**
+ * 添加初始菜单
+ * */ 
 var customMenu = new Menu();
 function setOriginMenu(params) {
      const menu = new Menu();
@@ -389,9 +392,12 @@ function setOriginMenu(params) {
      Menu.setApplicationMenu(menu);
 }
  
+/**
+ * 动态添加菜单
+ * */ 
 function addMenuItem() {
    var type = 'normal';
-   if (radio.checked) {
+   if (radio.checked) {  
        type = 'radio'
    } 
    if (checkbox.checked) {
@@ -403,4 +409,49 @@ function addMenuItem() {
    radio.checked = false;
    Menu.setApplicationMenu(Menu.getApplicationMenu())
 }
+
+
+/**
+ * 上下文菜单
+ * */ 
+function onload(params) {
+    const menu =  new Menu();
+    const win = new BrowserWindow();
+    var menuItemOpen = new MenuItem({label:'打开',click:()=>{
+        var paths = dialog.showOpenDialog({properties:['openFile']});
+        if (paths != undefined) {
+            console.log(paths)
+            // win.setTitle(paths[0]);
+        }
+    }})
+
+    var menuItemSave = new MenuItem({label:'保存',click:saveClick});
+    var menuItemFile = new MenuItem({label:'文件',submenu:[menuItemOpen,menuItemSave]});
+
+    var menuItemInsertImage = new MenuItem({label:'插入图像'});
+    var menuItemDelImage = new MenuItem({label:'删除图像'});
+
+    menu.append(menuItemFile);
+    menu.append(menuItemInsertImage);
+    menu.append(menuItemDelImage)
+
+    panel.addEventListener('contextmenu',function (event) {
+        event.preventDefault();
+        x = event.x;
+        y = event.y;
+        menu.popup({x:x,y:y});
+        return false;
+    })
+}
+
+function saveClick(params) {
+    var win = new BrowserWindow({width:300,height:200});
+    win.loadURL('https://www.baidu.com/')
+}
+
+
+/**
+ * 托盘应用
+ * */ 
+
 

@@ -1,8 +1,9 @@
-const { app, BrowserWindow ,Menu} = require('electron')
+const { app, BrowserWindow ,Menu } = require('electron')
+const Tray = require('electron').Tray;
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
-let win , childWin , modelWin
+let win , childWin, modelWin , tray ,tray2,tray3, contextMenu
 /**
  * width
  * height
@@ -90,6 +91,21 @@ function createWindow () {
  * 菜单类型 （type:）
  * 1-5: normal, separator, submenu, checkbox or radio
  * */  
+
+
+/**
+ *  创建托盘应用图标（Tray）
+ * 
+ * */  
+// tray = new Tray('/src/assets/pander.ico')
+// contextMenu = Menu.buildFromTemplate([
+//     { label: 'Item1', type: 'radio' },
+//     { label: 'Item2', type: 'radio' },
+//     { label: 'Item3', type: 'radio', checked: true },
+//     { label: 'Item4', type: 'radio' }
+// ])
+// tray.setToolTip('This is my application.')
+// tray.setContextMenu(contextMenu)
 
 
 
